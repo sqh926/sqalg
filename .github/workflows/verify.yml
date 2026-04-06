@@ -25,6 +25,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+	  
 
       - name: Set up competitive-verifier
         uses: competitive-verifier/actions/setup@v2
@@ -32,6 +35,12 @@ jobs:
           cache-pip: true
 
       # Initialize your own environment for resolving.
+       - name: Use GCC 14.2
+        run: |
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
+          g++ --version
+
       - name: oj-resolve
         uses: competitive-verifier/actions/oj-resolve@v2
         with:

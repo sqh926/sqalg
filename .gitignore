@@ -39,3 +39,21 @@
 
 # debug information files
 *.dwo
+
+
+# Emacs backup files
+*~
+\#*\#
+.\#*
+
+# Auto-save files
+\#*#
+
+# Lock files
+.#*
+
+# Directory local variables
+.dir-locals.el
+
+# Customization file
+custom.el

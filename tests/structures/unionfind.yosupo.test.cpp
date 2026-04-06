@@ -2,10 +2,12 @@
 #include <iostream>
 #include "src/util/common.hpp"
 #include "src/structures/unionfind.hpp"
-// #include "blazingio/blazingio.min.hpp"
+#include "blazingio/blazingio.min.hpp"
 using namespace std;
 
 i32 main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
     i32 n, q;
     cin >> n >> q;
     unionfind uf(n);
