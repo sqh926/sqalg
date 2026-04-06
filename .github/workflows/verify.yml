@@ -35,7 +35,7 @@ jobs:
           cache-pip: true
 
       # Initialize your own environment for resolving.
-       - name: Use GCC 14.2
+      - name: Use GCC 14.2
         run: |
           sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
