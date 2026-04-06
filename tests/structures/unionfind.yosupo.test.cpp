@@ -2,7 +2,7 @@
 #include <iostream>
 #include "src/util/common.hpp"
 #include "src/structures/unionfind.hpp"
-#include "blazingio/blazingio.min.hpp"
+// #include "blazingio/blazingio.min.hpp"
 using namespace std;
 
 i32 main() {
