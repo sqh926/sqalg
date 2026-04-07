@@ -4,13 +4,15 @@
 #include <iostream>
 #include "src/number_theory/modint.hpp"
 #include "src/math/combinatorics.hpp"
-#include "blazingio/blazingio.min.hpp"
+// #include "blazingio/blazingio.min.hpp"
 
 using namespace std;
 using namespace sqalg;
 
 
 i32 main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
     i32 q, m;
     cin >> q >> m;
     dynamic_modint::set_mod(m);
