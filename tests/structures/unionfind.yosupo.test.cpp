@@ -1,3 +1,4 @@
+// @brief Unionfind
 #define PROBLEM "https://judge.yosupo.jp/problem/unionfind"
 #include <iostream>
 #include "src/util/common.hpp"
