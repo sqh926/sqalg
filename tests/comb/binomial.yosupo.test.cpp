@@ -17,6 +17,6 @@ i32 main() {
     while (q-->0) {
 	i32 n, k;
 	cin >> n >> k;
-	cout << C<dynamic_modint>(n, k) << "\n";
+	cout << static_cast<i32>(C<dynamic_modint>(n, k)) << "\n";
     }
 }
