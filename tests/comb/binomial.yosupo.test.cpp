@@ -1,8 +1,8 @@
 // @brief Binomial Coefficient (Prime Mod)
 #define PROBLEM "https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod"
 #include <iostream>
-#include "src/number_theory/modint.hpp"
 #define SQALG_MAXN 10000001
+#include "src/number_theory/modint.hpp"
 #include "src/math/combinatorics.hpp"
 
 
