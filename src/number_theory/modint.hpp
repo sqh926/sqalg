@@ -20,11 +20,11 @@ namespace sqalg {
 	constexpr static_modint operator-(const static_modint& rhs) { return static_modint(*this) -= rhs; }
 	constexpr static_modint operator*(const static_modint& rhs) { return static_modint(*this) *= rhs; }
 	constexpr static_modint operator/(const static_modint& rhs) { return static_modint(*this) /= rhs; }
-	constexpr static_modint operator+=(const static_modint& rhs) { x += rhs.x; x = std::min(x, x - MOD); return *this; }
-	constexpr static_modint operator-=(const static_modint& rhs) { x -= rhs.x; x = std::min(x, x + MOD); return *this; }
+	constexpr static_modint operator+=(const static_modint& rhs) { x += rhs.x; if (x >= MOD) x -= MOD; return *this; }
+	constexpr static_modint operator-=(const static_modint& rhs) { x -= rhs.x; if (x < 0) x += MOD; return *this; }
 	constexpr static_modint operator*=(const static_modint& rhs) { (x *= rhs.x) %= MOD; return *this; }
 	constexpr static_modint operator/=(const static_modint& rhs) { return *this *= pow(rhs, -1); }
-	template<typename T> constexpr explicit operator T() const { return x; }
+	template<typename T> constexpr operator T() const { return x; }
 	constexpr static static_modint pow(static_modint a, i64 p) {
 	    // this trick works only for prime mods 
 	    p = p % (MOD - 1) + (p >= 0 ? 0 : MOD - 1);
@@ -67,11 +67,11 @@ namespace sqalg {
 	constexpr dynamic_modint operator-(const dynamic_modint& rhs) { return dynamic_modint(*this) -= rhs; }
 	constexpr dynamic_modint operator*(const dynamic_modint& rhs) { return dynamic_modint(*this) *= rhs; }
 	constexpr dynamic_modint operator/(const dynamic_modint& rhs) { return dynamic_modint(*this) /= rhs; }
-	constexpr dynamic_modint operator+=(const dynamic_modint& rhs) { x += rhs.x; x = std::min(x, x - MOD); return *this; }
-	constexpr dynamic_modint operator-=(const dynamic_modint& rhs) { x -= rhs.x; x = std::min(x, x + MOD); return *this; }
+	constexpr dynamic_modint operator+=(const dynamic_modint& rhs) { x += rhs.x; if (x >= MOD) x -= MOD; return *this; }
+	constexpr dynamic_modint operator-=(const dynamic_modint& rhs) { x -= rhs.x; if (x < 0) x += MOD; return *this; }
 	constexpr dynamic_modint operator*=(const dynamic_modint& rhs) { (x *= rhs.x) %= MOD; return *this; }
 	constexpr dynamic_modint operator/=(const dynamic_modint& rhs) { return *this *= pow(rhs, -1); }
-	template<typename T> constexpr explicit operator T() const { return x; }
+	template<typename T> constexpr operator T() const { return x; }
 	constexpr static dynamic_modint pow(dynamic_modint a, i64 p) {
 	    // this trick works only for prime mods 
 	    p = p % (MOD - 1) + (p >= 0 ? 0 : MOD - 1);

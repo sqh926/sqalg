@@ -1,10 +1,10 @@
 // @brief Binomial Coefficient (Prime Mod)
 #define PROBLEM "https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod"
-#include <iostream>
 #define SQALG_MAXN 10000001
+#include <iostream>
 #include "src/number_theory/modint.hpp"
 #include "src/math/combinatorics.hpp"
-
+#include "blazingio/blazingio.min.hpp"
 
 using namespace std;
 using namespace sqalg;
