@@ -11,35 +11,55 @@
 namespace sqalg {
 
     u64 get_divisor(u64 n) {
-	if (n % 2 == 0) return 2;	
+	auto f = [&](u64 x, u64 c) {
+	    return ((u128)x * x + c) % n;
+	};
+	const int batch = 128;
 	while (true) {
-            u64 t = rng() % (n - 1) + 1;
-            auto f = [&](u64 x) {
-                return (mulmod64(x, x, n) + t) % n;
-            };
-            u64 x = 0, y = 0, g = 1;
-            
-            while (g == 1) {
-                for (int i = 0; i < 64; i++) {
-                    x = f(x);
-                    y = f(f(y));
-                    if (x == y) [[unlikely]] {
-                        break;
-                    }
-                    u64 dif = x > y ? x - y : y - x;
-                    u64 ng = mulmod64(g, dif, n);
-                    g = ng == 0 ? g : ng;
-                }
-                g = std::gcd(g, n);
-                if (g != 1 && g != n) return g;                
-                if (g == n) break;    
-            }
-        }
+	    u64 a = rng();
+	    u64 b = a;
+	    u64 c = rng();
+	    u64 pa, pb, g = 1;
+
+	    while (g == 1) {
+		pa = a, pb = b;
+		u64 q = 1;
+		for (i32 i = 0; i < batch; i++) {
+		    a = f(a, c);
+		    b = f(f(b, c), c);
+		    u64 diff = a > b ? a - b : b - a;
+		    q = (u128)q * diff % n;
+		}
+		g = gcd(q, n);
+	    }
+
+	    if (g == n) {
+		d = 1;
+		while (d == 1) {
+		    pa = f(pa, c);
+		    pb = f(f(pb, c), c);
+		    u64 diff = pa > pb ? pa - pb : pb - pa;
+		    g = gcd(diff, n);
+		}
+	    }
+	    if (g != n) return g;
+	}
+	    
+	
     }
 
     std::vector<std::pair<u64, i16>> factorize(u64 n) {
 	if (n <= 1) return {};
 	if (is_prime(n)) return { {n, 1} };
+
+	if (n % 2 == 0) {
+	    int exp = 0;
+	    while (n % 2 == 0) n >>= 1, exp++;
+	    std::vector<std::pair<u64,i16>> res = {{2, exp}};
+	    auto remaining = factorize(n);
+	    res.insert(res.end(), remaining.begin(), remaining.end());
+	    return res;	    	    
+	}
 	
 	auto g = get_divisor(n);
 	auto f1 = factorize(g);
