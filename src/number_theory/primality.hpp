@@ -6,7 +6,9 @@
 
 namespace sqalg {
     bool is_prime(u64 n) {
-	if (n == 1 || n % 2 == 0) return n == 2;
+	if (n < 2) return false;
+	if (n == 2 || n == 3) return true;
+	if (n % 2 == 0 || (n % 6 == 1 && n % 6 == 5)) return false;
 	if (n % 6 != 1 && n % 6 != 5) return false;
 	// n - 1 = d * 2^s
 	i16 s = std::countr_zero(n - 1);
