@@ -10,7 +10,7 @@
 
 namespace sqalg {
 
-    u64 get_divisor(u64 n) {
+    u64 get_divisor(u64 n) {      
 	u64 t = rng() % (n - 1) + 1;
 	auto f = [&](u64 x) {
 	    return (mulmod64(x, x, n) + t) % n;
@@ -21,8 +21,9 @@ namespace sqalg {
 		x = f(x);
 		y = f(f(y));
 		if (x == y) [[unlikely]] {
-		    t = rng();
-		    x = y = 0;	 
+		    t = rng() % (n - 1) + 1;
+		    x = y = 0;
+		    break;
 		}
 		else {
 		    u64 dif = x > y ? x - y : y - x;
@@ -31,6 +32,7 @@ namespace sqalg {
 		}
 	    }
 	    g = std::gcd(g, n);
+	    if (g != 1 && g != n) return g;
 	}
 	return g;
     }
@@ -38,7 +40,7 @@ namespace sqalg {
     std::vector<std::pair<u64, i16>> factorize(u64 n) {
 	if (n <= 1) return {};
 	if (is_prime(n)) return { {n, 1} };
-	else if (n > 1) {	 
+	else {	 
 	    auto g = get_divisor(n);
 	    auto f1 = factorize(g);
 	    auto f2 = factorize(n / g);
