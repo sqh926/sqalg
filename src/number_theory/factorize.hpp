@@ -10,54 +10,53 @@
 
 namespace sqalg {
 
-    u64 get_divisor(u64 n) {      
-	u64 t = rng() % (n - 1) + 1;
-	auto f = [&](u64 x) {
-	    return (mulmod64(x, x, n) + t) % n;
-	};
-	u64 x = 0, y = 0, g = 1;
-	while (g == 1) {
-	    for (int i = 0; i < 64; i++) {
-		x = f(x);
-		y = f(f(y));
-		if (x == y) [[unlikely]] {
-		    t = rng() % (n - 1) + 1;
-		    x = y = 0;
-		    break;
-		}
-		else {
-		    u64 dif = x > y ? x - y : y - x;
-		    u64 ng = mulmod64(g, dif, n);
-		    g = ng == 0 ? g : ng;
-		}
-	    }
-	    g = std::gcd(g, n);
-	    if (g != 1 && g != n) return g;
-	}
-	return g;
+    u64 get_divisor(u64 n) {
+	if (n % 2 == 0) return 2;	
+	while (true) {
+            u64 t = rng() % (n - 1) + 1;
+            auto f = [&](u64 x) {
+                return (mulmod64(x, x, n) + t) % n;
+            };
+            u64 x = 0, y = 0, g = 1;
+            
+            while (g == 1) {
+                for (int i = 0; i < 64; i++) {
+                    x = f(x);
+                    y = f(f(y));
+                    if (x == y) [[unlikely]] {
+                        break;
+                    }
+                    u64 dif = x > y ? x - y : y - x;
+                    u64 ng = mulmod64(g, dif, n);
+                    g = ng == 0 ? g : ng;
+                }
+                g = std::gcd(g, n);
+                if (g != 1 && g != n) return g;                
+                if (g == n) break;    
+            }
+        }
     }
 
     std::vector<std::pair<u64, i16>> factorize(u64 n) {
 	if (n <= 1) return {};
 	if (is_prime(n)) return { {n, 1} };
-	else {	 
-	    auto g = get_divisor(n);
-	    auto f1 = factorize(g);
-	    auto f2 = factorize(n / g);
-	    std::vector<std::pair<u64,i16>> res;
-	    i32 i1 = 0, i2 = 0;
-	    std::sort(f1.begin(), f1.end()), std::sort(f2.begin(), f2.end());
-	    while(i1 < f1.size() && i2 < f2.size()) {
-		if (f1[i1].first < f2[i2].first) res.emplace_back(f1[i1++]);
-		else if (f1[i1].first > f2[i2].first) res.emplace_back(f2[i2++]);
-		else {
-		    res.emplace_back(f1[i1].first, f1[i1].second + f2[i2].second), i1++, i2++;
-		}
+	
+	auto g = get_divisor(n);
+	auto f1 = factorize(g);
+	auto f2 = factorize(n / g);
+	std::vector<std::pair<u64,i16>> res;
+	size_t i1 = 0, i2 = 0;
+	std::sort(f1.begin(), f1.end()), std::sort(f2.begin(), f2.end());
+	while(i1 < f1.size() && i2 < f2.size()) {
+	    if (f1[i1].first < f2[i2].first) res.emplace_back(f1[i1++]);
+	    else if (f1[i1].first > f2[i2].first) res.emplace_back(f2[i2++]);
+	    else {
+		res.emplace_back(f1[i1].first, f1[i1].second + f2[i2].second), i1++, i2++;
 	    }
-	    while(i1 < f1.size()) res.emplace_back(f1[i1++]);
-	    while(i2 < f2.size()) res.emplace_back(f2[i2++]);
-	    return res;
 	}
+	while(i1 < f1.size()) res.emplace_back(f1[i1++]);
+	while(i2 < f2.size()) res.emplace_back(f2[i2++]);
+	return res;
     }
     
     
