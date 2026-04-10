@@ -3,6 +3,7 @@
 
 #include "src/util/common.hpp"
 #include <vector>
+#include <bit>
 
 namespace sqalg {
     bool is_prime(u64 n) {
