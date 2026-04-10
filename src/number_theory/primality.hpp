@@ -10,7 +10,6 @@ namespace sqalg {
 	if (n < 2) return false;
 	if (n == 2 || n == 3) return true;
 	if (n % 2 == 0 || (n % 6 != 1 && n % 6 != 5)) return false;
-	if (n % 6 != 1 && n % 6 != 5) return false;
 	// n - 1 = d * 2^s
 	i16 s = std::countr_zero(n - 1);
 	u64 d = (n - 1) >> s;
