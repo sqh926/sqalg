@@ -11,14 +11,14 @@
 namespace sqalg {
 
     u64 get_divisor(u64 n) {
-	auto f = [&](u64 x, u64 c) {
+	auto f = [&](u64 x, u64 c) -> u64 {
 	    return ((u128)x * x + c) % n;
 	};
 	const int batch = 128;
 	while (true) {
-	    u64 a = rng();
+	    u64 a = rng() % (n - 1) + 1;
 	    u64 b = a;
-	    u64 c = rng();
+	    u64 c = rng() % (n - 2) + 2;
 	    u64 pa, pb, g = 1;
 
 	    while (g == 1) {
@@ -58,7 +58,7 @@ namespace sqalg {
 	    std::vector<std::pair<u64,i16>> res = {{2, exp}};
 	    auto remaining = factorize(n);
 	    res.insert(res.end(), remaining.begin(), remaining.end());
-	    return res;	    	    
+	    return res;   	    
 	}
 	
 	auto g = get_divisor(n);
