@@ -2,7 +2,7 @@
 #define SQALG_NUMBER_THEORY_FACTORIZE_HPP
 
 #include "src/util/common.hpp"
-#include "stc/random/rng.hpp"
+#include "src/random/rng.hpp"
 #include <vector>
 
 namespace sqalg {
