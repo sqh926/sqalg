@@ -5,7 +5,7 @@
 #include "src/structures/unionfind.hpp"
 #include "blazingio/blazingio.min.hpp"
 using namespace std;
-
+using namespace sqalg;
 i32 main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
