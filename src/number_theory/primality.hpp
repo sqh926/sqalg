@@ -2,10 +2,12 @@
 #define SQALG_NUMBER_THEORY_PRIMALITY_HPP
 
 #include "src/util/common.hpp"
+#include <vector>
 
 namespace sqalg {
     bool is_prime(u64 n) {
 	if (n == 1 || n % 2 == 0) return n == 2;
+	if (n % 6 != 1 && n % 6 != 5) return false;
 	// n - 1 = d * 2^s
 	i16 s = std::countr_zero(n - 1);
 	u64 d = (n - 1) >> s;
@@ -21,8 +23,9 @@ namespace sqalg {
 	    return true;
 	};
 
-	vector<int> bases;
+	std::vector<int> bases;
 	if (n < 4759123141) bases = {2, 7, 61};
+	else if (n < 1122004669633) bases = {2, 13, 23, 1662803};
 	else bases = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};
 	for (auto a : bases) {
 	    if (a % n == 0) continue;
