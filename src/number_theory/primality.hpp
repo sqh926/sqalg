@@ -9,7 +9,7 @@ namespace sqalg {
     bool is_prime(u64 n) {
 	if (n < 2) return false;
 	if (n == 2 || n == 3) return true;
-	if (n % 2 == 0 || (n % 6 == 1 && n % 6 == 5)) return false;
+	if (n % 2 == 0 || (n % 6 != 1 && n % 6 != 5)) return false;
 	if (n % 6 != 1 && n % 6 != 5) return false;
 	// n - 1 = d * 2^s
 	i16 s = std::countr_zero(n - 1);
@@ -27,7 +27,11 @@ namespace sqalg {
 	};
 
 	std::vector<int> bases;
-	if (n < 4759123141) bases = {2, 7, 61};
+	if (n < 2047) bases = {2};
+	else if (n < 1373653) bases = {2, 3};
+	else if (n < 25326001) bases = {2, 3, 5};
+	else if (n < 3215031751) bases = {2, 3, 5, 7};
+	else if (n < 4759123141) bases = {2, 7, 61};
 	else if (n < 1122004669633ull) bases = {2, 13, 23, 1662803};
 	else bases = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};
 	for (auto a : bases) {
