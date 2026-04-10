@@ -12,15 +12,16 @@ namespace sqalg {
 
 	auto test = [&](u64 a) -> bool {
 	    u64 x = bpow64(a, d, n);
-	    if (x == 1) return false;
-	    for (int i = 0; i < s; i++) {
-		if (x == n - 1) return false;
+	    if (x == 1 || x == n - 1) return false;
+	    for (int i = 1; i < s; i++) {
 		x = mulmod64(x, x, n);
+		if (x == n - 1) return false;
+		if (x == 1) return true;	
 	    }
 	    return true;
 	};
 
-	i32 bases[] = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};
+	static constexpr i32 bases[] = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};
 	for (auto a : bases) {
 	    if (a % n == 0) continue;
 	    if (test(a)) return false;

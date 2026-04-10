@@ -22,10 +22,10 @@ static constexpr i32 maxn = 1 << 19;
 #endif
 
 
-u32 mulmod32(u32 x, u32 y, u32 mod) {
+inline u32 mulmod32(u32 x, u32 y, u32 mod) {
     return (u64)x * y % mod;
 }
-u64 mulmod64(u64 x, u64 y, u64 mod) {
+inline u64 mulmod64(u64 x, u64 y, u64 mod) {
     return (u128)x * y % mod;
 }
 
