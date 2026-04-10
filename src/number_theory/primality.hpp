@@ -21,7 +21,9 @@ namespace sqalg {
 	    return true;
 	};
 
-	static constexpr i32 bases[] = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};
+	vector<int> bases;
+	if (n < 4759123141) bases = {2, 7, 61};
+	else bases = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};
 	for (auto a : bases) {
 	    if (a % n == 0) continue;
 	    if (test(a)) return false;
