@@ -39,7 +39,7 @@ namespace sqalg {
 		    pa = f(pa, c);
 		    pb = f(f(pb, c), c);
 		    u64 diff = pa > pb ? pa - pb : pb - pa;
-		    g = gcd(diff, n);
+		    g = std::gcd(diff, n);
 		}
 	    }
 	    if (g != n) return g;
