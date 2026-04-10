@@ -30,12 +30,12 @@ namespace sqalg {
 		    u64 diff = a > b ? a - b : b - a;
 		    q = (u128)q * diff % n;
 		}
-		g = gcd(q, n);
+		g = std::gcd(q, n);
 	    }
 
 	    if (g == n) {
-		d = 1;
-		while (d == 1) {
+		g = 1;
+		while (g == 1) {
 		    pa = f(pa, c);
 		    pb = f(f(pb, c), c);
 		    u64 diff = pa > pb ? pa - pb : pb - pa;
