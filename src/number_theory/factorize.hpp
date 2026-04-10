@@ -3,13 +3,15 @@
 
 #include "src/util/common.hpp"
 #include "src/random/rng.hpp"
+#include "src/number_theory/primality.hpp"
 #include <vector>
 #include <algorithm>
+#include <numeric>
 
 namespace sqalg {
 
     u64 get_divisor(u64 n) {
-	u64 t = rng();
+	u64 t = rng() % (n - 1) + 1;
 	auto f = [&](u64 x) {
 	    return (mulmod64(x, x, n) + t) % n;
 	};
@@ -34,6 +36,7 @@ namespace sqalg {
     }
 
     std::vector<std::pair<u64, i16>> factorize(u64 n) {
+	if (n <= 1) return {};
 	if (is_prime(n)) return { {n, 1} };
 	else if (n > 1) {	 
 	    auto g = get_divisor(n);
