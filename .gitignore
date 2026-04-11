@@ -57,3 +57,7 @@
 
 # Customization file
 custom.el
+
+.competitive-verifier/
+verify_files.json
+verify.sh
