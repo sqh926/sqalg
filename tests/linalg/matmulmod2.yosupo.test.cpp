@@ -5,7 +5,7 @@
 #include <iostream>
 #include "src/util/common.hpp"
 #include "src/structures/bitvector.hpp"
-// #include "blazingio/blazingio.min.hpp"
+#include "blazingio/blazingio.min.hpp"
 
 using namespace std;
 using namespace sqalg;
