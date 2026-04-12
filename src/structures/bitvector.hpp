@@ -82,6 +82,17 @@ namespace sqalg {
 		res += std::popcount(data[i]);
 	    return res;
 	}
+	constexpr size_t ctz() const {
+	    size_t res = 0, i = 0;
+	    while (i < blocks && data[i] == word_t(0)) {
+		res += bits;
+		i++;
+	    }
+	    if (i < blocks) {
+		res += std::countr_zero(data[i]);
+	    }
+	    return std::min(res, n);
+	}
 	constexpr void flip() {
 	    if (blocks == 0) return;
 	    for(size_t i = 0; i < blocks; i++) {
@@ -89,13 +100,16 @@ namespace sqalg {
 	    }
 	    if (n % bits) data[blocks - 1] &= (word_t(1) << (n % bits)) - 1;
 	}
+	constexpr _bitvector& xor_from(const _bitvector& t, size_t start) {
+	    for (size_t i = start / bits; i < blocks; i++)
+		data[i] ^= t.data[i];
+	    return *this;
+	}
 	constexpr bool operator[](size_t i) const {
 	    return test(i);
 	}
 	constexpr _bitvector& operator ^= (const _bitvector& t) {
-	    for (size_t i = 0; i < blocks; i++)
-		data[i] ^= t.data[i];
-	    return *this;
+	    return xor_from(t, 0);
 	}
 	constexpr _bitvector operator ^ (const _bitvector& t) const {
 	    return _bitvector(*this) ^= t;	    
