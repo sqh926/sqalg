@@ -1,11 +1,14 @@
 // @brief Matrix Product (Mod 2)
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_product_mod_2"
 #define SQALG_MAXN 1 << 12
-
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2")
 #include <iostream>
 #include "src/util/common.hpp"
 #include "src/structures/bitvector.hpp"
 #include "blazingio/blazingio.min.hpp"
+
+
 
 using namespace std;
 using namespace sqalg;
@@ -24,9 +27,7 @@ void calc(i32 i) {
 }
 
 
-
 string s;
-
 void from_string(bitvector<maxn>& bv) {
     cin >> s;
     for (i32 i = 0; i < s.size(); i++)
@@ -49,7 +50,6 @@ i32 main() {
 	from_string(b[i]);
     }
     const u16 bits = bitvector<maxn>::bits;
-
     for (i32 j = 0; j < m; j += bits) {
 	for (i32 offset = 0; offset < bits; offset += K) {
 	    calc(offset + j);
