@@ -4,9 +4,9 @@
 #include "src/util/common.hpp"
 #include "src/structures/bitvector.hpp"
 #include <iostream>
+#include "blazingio/blazingio.min.hpp"
 #pragma GCC optimize("O3,unroll-loops")
 #pragma GCC target("avx2")
-#include "blazingio/blazingio.min.hpp"
 
 using namespace std;
 using namespace sqalg;

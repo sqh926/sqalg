@@ -2,11 +2,11 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_product_mod_2"
 #define SQALG_MAXN 1 << 12
 #include <iostream>
-#pragma GCC optimize("O3,unroll-loops")
-#pragma GCC target("avx2")
 #include "src/util/common.hpp"
 #include "src/structures/bitvector.hpp"
 #include "blazingio/blazingio.min.hpp"
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2")
 
 
 
