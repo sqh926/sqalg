@@ -5,8 +5,6 @@
 #include "src/util/common.hpp"
 #include "src/structures/bitvector.hpp"
 #include "blazingio/blazingio.min.hpp"
-#pragma GCC optimize("O3,unroll-loops")
-#pragma GCC target("avx2")
 
 
 
