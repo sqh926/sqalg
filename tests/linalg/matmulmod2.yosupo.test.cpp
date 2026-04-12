@@ -2,6 +2,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_product_mod_2"
 #define SQALG_MAXN 1 << 12
 #include <iostream>
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2")
 #include "src/util/common.hpp"
 #include "src/structures/bitvector.hpp"
 #include "blazingio/blazingio.min.hpp"
@@ -26,7 +28,7 @@ void calc(i32 i) {
 
 
 string s;
-void from_string(bitvector<maxn>& bv) {
+void read_from_string(bitvector<maxn>& bv) {
     cin >> s;
     for (i32 i = 0; i < s.size(); i++)
 	if (s[i] == '1')
@@ -42,10 +44,10 @@ i32 main() {
     cin >> n >> m >> k;
     
     for (i32 i = 0; i < n; i++) {
-	from_string(a[i]);	
+	read_from_string(a[i]);	
     }
     for (i32 i = 0; i < m; i++) {
-	from_string(b[i]);
+	read_from_string(b[i]);
     }
     const u16 bits = bitvector<maxn>::bits;
     for (i32 j = 0; j < m; j += bits) {
