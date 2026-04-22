@@ -14,7 +14,7 @@ namespace sqalg {
 	auto f = [&](u64 x, u64 c) -> u64 {
 	    return ((u128)x * x + c) % n;
 	};
-	const int batch = 128;
+	const int batch = 1024;
 	while (true) {
 	    u64 a = rng() % (n - 1) + 1;
 	    u64 b = a;
