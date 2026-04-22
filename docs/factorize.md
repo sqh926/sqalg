@@ -28,7 +28,7 @@ $$
 ### Cycle Detection (Floyd's Algorithm)
 
 The sequence $x_0, x_1, x_2, \ldots$ reduced modulo $p$ is eventually periodic:
-there is some number elements in the sequence before we cycle, call it $\mu$ and a cycle length, call it $\lambda$ such that
+there is some number of elements in the sequence before we cycle, call it $\mu$ and a cycle length, call it $\lambda$ such that
 
 $$
 x_i \equiv x_j \pmod{p} \iff i, j \geq \mu \text{ and } \lambda \mid i - j.
