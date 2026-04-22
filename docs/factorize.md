@@ -51,7 +51,7 @@ So we need the smallest $i \geq \mu$ with $\lambda \mid i$, which is $\lambda \l
 Since $\lceil \mu / \lambda \rceil \leq \mu / \lambda + 1$, we get $\lambda \lceil \mu / \lambda \rceil \leq \mu + \lambda$.
 Both $\mu$ and $\lambda$ are $O(\sqrt{p})$, so the pointers meet after $O(\sqrt{p})$ iterations.
 
-When they meet we have $p \mid x_{2i} - x_i = b - a$, so $\gcd(|a - b|, n)$ gives a non-trivial factor.
+When they meet we have $p \mid x_{2i} - x_i = b - a$, so $\gcd(\lvert a - b \rvert, n)$ gives a non-trivial factor.
 
 If $\gcd$ returns $n$, the chosen $c$ was unlucky.
 In that case restart the algorithm with new $c$.
