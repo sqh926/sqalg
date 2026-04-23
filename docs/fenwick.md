@@ -59,7 +59,7 @@ The choice of $p(i)$ determines the efficiency of both operations. For example, 
 
 There might be a logical way to derive the right $p(i)$, but we will just use magic. The idea is to look at the binary representation of $i$ and zero out all trailing set bits:
 
-![p(i) example](fenwick_pf.png)
+![p(i) example](https://raw.githubusercontent.com/sqh926/sqalg/main/docs/fenwick_pf.png)
 
 Some values:
 
@@ -73,23 +73,23 @@ Some values:
 | 5   | 4      |
 | 6   | 6      |
 
-To compute $p(i)$, note that $i + 1$ clears all trailing 1-bits of $i$ and sets the next 0-bit to 1. Therefore $i \mathbin{\&} (i+1)$ keeps the prefix and zeros the trailing 1-bits, giving exactly $p(i)$.
+To compute $p(i)$, note that $i + 1$ clears all trailing 1-bits of $i$ and sets the next 0-bit to 1. Therefore $i & (i+1)$ keeps the prefix and zeros the trailing 1-bits, giving exactly $p(i)$.
 
 ### Finding all $j$ covering $i$
 
 Since $p(j)$ zeros the trailing set bits of $j$, the range $[p(j), j]$ consists of all integers that share the same prefix as $j$ up to $j$'s lowest 0-bit, with the lower bits arbitrary. Therefore $p(j) \leq i \leq j$ if and only if $i$ and $j$ share that common prefix and $j$'s bits below that position are all 1s:
 
-![add example](fenwick_add.png)
+![add example](https://raw.githubusercontent.com/sqh926/sqalg/main/docs/fenwick_add.png)
 
 To enumerate all such $j$, start with $j = i$. Each subsequent $j$ must have a strictly longer trailing-ones region — otherwise $p(j)$ would not reach far enough left to include $i$. The smallest such extension sets $j$'s lowest 0-bit to 1, growing the trailing-ones region by exactly one position. Repeating this gives all nodes covering $i$ in increasing order:
 
-![inc example](fenwick_inc.png)
+![inc example](https://raw.githubusercontent.com/sqh926/sqalg/main/docs/fenwick_inc.png)
 
-Setting the lowest 0-bit is equivalent to $j \leftarrow j \mathbin{|} (j+1)$, since $j + 1$ clears the trailing 1-bits and sets the next 0-bit, so $j \mathbin{|} (j+1)$ preserves the trailing 1-bits and additionally sets that 0-bit.
+Setting the lowest 0-bit is equivalent to $j \leftarrow j | (j+1)$, since $j + 1$ clears the trailing 1-bits and sets the next 0-bit, so $j | (j+1)$ preserves the trailing 1-bits and additionally sets that 0-bit.
 
 ### Build
 
-Given an initial array, the tree can be built in $O(n)$ by propagating each $f[i]$ directly to its nearest ancestor $h(i) = i \mathbin{|} (i+1)$:
+Given an initial array, the tree can be built in $O(n)$ by propagating each $f[i]$ directly to its nearest ancestor $h(i) = i | (i+1)$:
 
 $$
 f[h(i)] \mathrel{+}= f[i] \quad \text{for } i = 0, 1, \ldots, n-1.
@@ -99,9 +99,9 @@ Each node is visited exactly once, giving $O(n)$ total work.
 
 ### Complexity
 
-**$\text{pref}(r)$:** Each iteration sets $r \leftarrow p(r) - 1 = (r \mathbin{\&} (r+1)) - 1$, which clears the lowest set bit of $r+1$. Since $r+1$ has at most $\lfloor \log_2 n \rfloor + 1$ bits, the loop runs $O(\log n)$ times.
+**$\text{pref}(r)$:** Each iteration sets $r \leftarrow p(r) - 1 = (r & (r+1)) - 1$, which clears the lowest set bit of $r+1$. Since $r+1$ has at most $\lfloor \log_2 n \rfloor + 1$ bits, the loop runs $O(\log n)$ times.
 
-**$\text{add}(i)$:** Each iteration sets $j \leftarrow j \mathbin{|} (j+1)$, which sets one new bit in $j$. Since $j < n$ has at most $\lfloor \log_2 n \rfloor + 1$ bits, the loop runs $O(\log n)$ times.
+**$\text{add}(i)$:** Each iteration sets $j \leftarrow j | (j+1)$, which sets one new bit in $j$. Since $j < n$ has at most $\lfloor \log_2 n \rfloor + 1$ bits, the loop runs $O(\log n)$ times.
 
 | Operation | Time | Space |
 |-----------|------|-------|
