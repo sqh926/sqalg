@@ -1,4 +1,4 @@
-// @Brief Point Add Range Sum
+// @brief Point Add Range Sum
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 
 #include "src/util/common.hpp"

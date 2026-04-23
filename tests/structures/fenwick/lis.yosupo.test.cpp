@@ -1,4 +1,4 @@
-// @Brief Longest Increasing Subsequence
+// @brief Longest Increasing Subsequence
 #define PROBLEM "https://judge.yosupo.jp/problem/longest_increasing_subsequence"
 
 #include "src/util/common.hpp"
