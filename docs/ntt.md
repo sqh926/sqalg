@@ -28,11 +28,11 @@ The key is to choose the evaluation points cleverly so that both steps become $O
 Suppose we have a special element $g$ satisfying two conditions:
 
 $$
-g^n = 1, \qquad \omega^i \neq \omega^j \text{ for } 0 \leq i < j < n.
+\omega^n = 1, \qquad \omega^i \neq \omega^j \text{ for } 0 \leq i < j < n.
 $$
 
 That is, all $n$ powers $1, g, \omega^2, \ldots, \omega^{n-1}$ are distinct.
-We call such $g$ a **primitive $n$-th root of unity**.
+We call such $\omega$ a **primitive $n$-th root of unity**.
 
 We choose the evaluation points $x_i = \omega^i$.
 
@@ -63,25 +63,26 @@ A(x) = A_0(x^2) + x \cdot A_1(x^2),
 $$
 
 where $A_0(y) = a_0 + a_2 y + a_4 y^2 + \cdots$ and $A_1(y) = a_1 + a_3 y + a_5 y^2 + \cdots$
-collect the even- and odd-indexed coefficients respectively.
+collect the even and odd indexed coefficients respectively.
 
-The squares $(g^i)^2 = \omega^{2i}$ for $i = 0, \ldots, n-1$ take only $n/2$
+The squares $(\omega^i)^2 = \omega^{2i}$ for $i = 0, \ldots, n-1$ take only $n/2$
 distinct values — they are $1, \omega^2, \omega^4, \ldots, \omega^{n-2}$, each appearing twice
 (from $i$ and $i + n/2$, since \$\omega^n = 1$).
 
-In other words, \$\omega^2$ is a primitive $n/2$-th root of unity, and evaluating
+In other words, $\omega^2$ is a primitive $n/2$-th root of unity, and evaluating
 $A_0$ and $A_1$ at the $n/2$-th roots of unity is a problem of half the size.
 After solving it recursively, we combine for $i = 0, \ldots, n/2 - 1$:
 
 $$
 A(g^i) = A_0(g^{2i}) + \omega^i \cdot A_1(g^{2i}),
 $$
+
 $$
 A(g^{i+n/2}) = A_0(g^{2i}) - \omega^i \cdot A_1(g^{2i}).
 $$
 
-The minus sign follows from \$\omega^{n/2} = -1$ (since \$\omega^{n/2}$ has order $2$ and is not $1$),
-so \$\omega^{i+n/2} = -g^i$.
+The minus sign follows from $\omega^{n/2} = -1$ (since $\omega^{n/2}$ has order $2$ and is not $1$),
+so $\omega^{i+n/2} = -g^i$.
 
 This gives $O(\log n)$ levels of $O(n)$ work each — $O(n \log n)$ total.
 
@@ -155,7 +156,7 @@ Overall time complexity is $O(n \log n)$.
 
 ### Optimizations
 
-**Iterative implementation.** The recursive formulation incurs $O(n)$ function call overhead.
+**Iterative implementation.** The recursive formulation incurs $O(n)$ function call overhead and lots of memory allocations.
 The straightforward recursive implementation follows directly from the Cooley-Tukey split:
 
 ```
