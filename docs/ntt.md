@@ -131,7 +131,7 @@ $$
 a_j = \frac{1}{n} \sum_{k=0}^{n-1} y_k \cdot \omega^{-jk}.
 $$
 
-In other words, $\text{DFT}^{-1}(y) = \tfrac{1}{n}\,\text{DFT}^*(y)$, where $\text{DFT}^*$ is simply $\text{DFT}$ with $\omega$ replaced by $\omega^{-1}$.
+In other words, $\text{DFT}^{-1}(y) = \tfrac{1}{n}\,\text{DFT}^{\ast}(y)$, where $\text{DFT}^{\ast}$ is simply $\text{DFT}$ with $\omega$ replaced by $\omega^{-1}$.
 
 ### Finding $\omega$ in $\mathbb{Z}_p$
 
