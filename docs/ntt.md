@@ -92,13 +92,11 @@ Since $\text{DFT}$ is linear, it can be written as $F \cdot a = y$ for some matr
 We know what each $y_i$ must equal:
 
 $$
-y_0 = a_0 + a_1 + a_2 + \cdots + a_{n-1},
-$$
-$$
-y_1 = a_0 + a_1\omega + a_2\omega^2 + \cdots + a_{n-1}\omega^{n-1},
-$$
-$$
-y_i = a_0 + a_1\omega^i + a_2\omega^{2i} + \cdots + a_{n-1}\omega^{(n-1)i}.
+\begin{aligned}
+y_0 &= a_0 + a_1 + a_2 + \cdots + a_{n-1}, \\
+y_1 &= a_0 + a_1\omega + a_2\omega^2 + \cdots + a_{n-1}\omega^{n-1}, \\
+y_i &= a_0 + a_1\omega^i + a_2\omega^{2i} + \cdots + a_{n-1}\omega^{(n-1)i}.
+\end{aligned}
 $$
 
 So the $i$-th row of $F$ is $(1,\, \omega^i,\, \omega^{2i},\, \ldots,\, \omega^{(n-1)i})$, giving:
@@ -138,8 +136,8 @@ In other words, $\text{DFT}^{-1}(y) = \tfrac{1}{n}\,\text{DFT}^{\ast}(y)$, where
 We need an algebraic structure where a primitive $n$-th root of unity exists.
 We work modulo a prime $p$ such that $n \mid p - 1$.
 
-By Fermat's little theorem, every element of $\mathbb{Z}_p^*$ satisfies $a^{p-1} \equiv 1$,
-so $\left(g^{(p-1)/n}\right)^n \equiv 1$. If $g$ is a primitive root of $\mathbb{Z}_p^*$,
+By Fermat's little theorem, every element of $\mathbb{Z}_p^{\ast}$ satisfies $a^{p-1} \equiv 1$,
+so $\left(g^{(p-1)/n}\right)^n \equiv 1$. If $g$ is a primitive root of $\mathbb{Z}_p^{\ast}$,
 then $\omega = g^{(p-1)/n}$ has order exactly $n$, making it a primitive $n$-th root of unity.
 
 Common choices that support $n$ up to large powers of $2$:
