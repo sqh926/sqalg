@@ -195,7 +195,7 @@ Writing each in binary (3 bits) and reversing the bits:
 | 6 | 110 | 011 | 3 |
 | 7 | 111 | 111 | 7 |
 
-Element originally at index $i$ ends up at position $\text{bit_reverse}(i)$.
+Element originally at index $i$ ends up at position $\text{bit\_reverse}(i)$.
 After this reordering, single-element subarrays are trivially done (base case $n=1$).
 Now consider how to assemble the final answer from the two half-results.
 Suppose positions $0\ldots3$ already hold $\text{DFT}$ of the even coefficients $[a_0, a_2, a_4, a_6]$,
