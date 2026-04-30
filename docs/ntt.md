@@ -25,13 +25,13 @@ The key is to choose the evaluation points cleverly so that both steps become $O
 
 ### Choosing the Evaluation Points
 
-Suppose we have a special element $g$ satisfying two conditions:
+Suppose we have a special element $\omega$ satisfying two conditions:
 
 $$
 \omega^n = 1, \qquad \omega^i \neq \omega^j \text{ for } 0 \leq i < j < n.
 $$
 
-That is, all $n$ powers $1, g, \omega^2, \ldots, \omega^{n-1}$ are distinct.
+That is, all $n$ powers $1, \omega, \omega^2, \ldots, \omega^{n-1}$ are distinct.
 We call such $\omega$ a **primitive $n$-th root of unity**.
 
 We choose the evaluation points $x_i = \omega^i$.
@@ -42,13 +42,13 @@ Define the operator $\text{DFT}$ that maps a polynomial $A$ to the vector of its
 at the $n$-th roots of unity:
 
 $$
-\text{DFT}(A) = \bigl(A(g^0),\, A(g^1),\, \ldots,\, A(g^{n-1})\bigr).
+\text{DFT}(A) = \bigl(A(\omega^0),\, A(\omega^1),\, \ldots,\, A(\omega^{n-1})\bigr).
 $$
 
 It is linear since for any polynomials $A$, $B$ and scalars $\alpha$, $\beta$:
 
 $$
-\text{DFT}(\alpha A + \beta B)_j = (\alpha A + \beta B)(g^j) = \alpha A(g^j) + \beta B(g^j) = (\alpha\,\text{DFT}(A) + \beta\,\text{DFT}(B))_j.
+\text{DFT}(\alpha A + \beta B)_j = (\alpha A + \beta B)(\omega^j) = \alpha A(\omega^j) + \beta B(\omega^j) = (\alpha\,\text{DFT}(A) + \beta\,\text{DFT}(B))_j.
 $$
 
 With this notation, step 1 is computing $\text{DFT}(A)$ and $\text{DFT}(B)$,
@@ -67,22 +67,22 @@ collect the even and odd indexed coefficients respectively.
 
 The squares $(\omega^i)^2 = \omega^{2i}$ for $i = 0, \ldots, n-1$ take only $n/2$
 distinct values — they are $1, \omega^2, \omega^4, \ldots, \omega^{n-2}$, each appearing twice
-(from $i$ and $i + n/2$, since \$\omega^n = 1$).
+(from $i$ and $i + n/2$, since $\omega^n = 1$).
 
 In other words, $\omega^2$ is a primitive $n/2$-th root of unity, and evaluating
 $A_0$ and $A_1$ at the $n/2$-th roots of unity is a problem of half the size.
 After solving it recursively, we combine for $i = 0, \ldots, n/2 - 1$:
 
 $$
-A(g^i) = A_0(g^{2i}) + \omega^i \cdot A_1(g^{2i}),
+A(\omega^i) = A_0(\omega^{2i}) + \omega^i \cdot A_1(\omega^{2i}),
 $$
 
 $$
-A(g^{i+n/2}) = A_0(g^{2i}) - \omega^i \cdot A_1(g^{2i}).
+A(\omega^{i+n/2}) = A_0(\omega^{2i}) - \omega^i \cdot A_1(\omega^{2i}).
 $$
 
 The minus sign follows from $\omega^{n/2} = -1$ (since $\omega^{n/2}$ has order $2$ and is not $1$),
-so $\omega^{i+n/2} = -g^i$.
+so $\omega^{i+n/2} = -\omega^i$.
 
 This gives $O(\log n)$ levels of $O(n)$ work each — $O(n \log n)$ total.
 
@@ -95,10 +95,10 @@ $$
 y_0 = a_0 + a_1 + a_2 + \cdots + a_{n-1},
 $$
 $$
-y_1 = a_0 + a_1g + a_2g^2 + \cdots + a_{n-1}g^{n-1},
+y_1 = a_0 + a_1\omega + a_2\omega^2 + \cdots + a_{n-1}\omega^{n-1},
 $$
 $$
-y_i = a_0 + a_1g^i + a_2g^{2i} + \cdots + a_{n-1}g^{(n-1)i}.
+y_i = a_0 + a_1\omega^i + a_2\omega^{2i} + \cdots + a_{n-1}\omega^{(n-1)i}.
 $$
 
 So the $i$-th row of $F$ is $(1,\, \omega^i,\, \omega^{2i},\, \ldots,\, \omega^{(n-1)i})$, giving:
@@ -106,7 +106,7 @@ So the $i$-th row of $F$ is $(1,\, \omega^i,\, \omega^{2i},\, \ldots,\, \omega^{
 $$
 F = \begin{pmatrix}
 1 & 1 & 1 & \cdots & 1 \\
-1 & g & \omega^2 & \cdots & \omega^{n-1} \\
+1 & \omega & \omega^2 & \cdots & \omega^{n-1} \\
 1 & \omega^2 & \omega^4 & \cdots & \omega^{2(n-1)} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 1 & \omega^{n-1} & \omega^{2(n-1)} & \cdots & \omega^{(n-1)^2}
@@ -131,20 +131,20 @@ $$
 a_j = \frac{1}{n} \sum_{k=0}^{n-1} y_k \cdot \omega^{-jk}.
 $$
 
-In other words, $\text{DFT}^{-1}(y) = \tfrac{1}{n}\,\text{DFT}^*(y)$, where $\text{DFT}^*$ is simply $\text{DFT}$ with $g$ replaced by \$\omega^{-1}$.
+In other words, $\text{DFT}^{-1}(y) = \tfrac{1}{n}\,\text{DFT}^*(y)$, where $\text{DFT}^*$ is simply $\text{DFT}$ with $\omega$ replaced by $\omega^{-1}$.
 
-### Finding $g$ in $\mathbb{Z}_p$
+### Finding $\omega$ in $\mathbb{Z}_p$
 
 We need an algebraic structure where a primitive $n$-th root of unity exists.
 We work modulo a prime $p$ such that $n \mid p - 1$.
 
 By Fermat's little theorem, every element of $\mathbb{Z}_p^*$ satisfies $a^{p-1} \equiv 1$,
-so $\left(r^{(p-1)/n}\right)^n \equiv 1$. If $r$ is a primitive root of $\mathbb{Z}_p^*$,
-then $g = r^{(p-1)/n}$ has order exactly $n$, making it a primitive $n$-th root of unity.
+so $\left(g^{(p-1)/n}\right)^n \equiv 1$. If $g$ is a primitive root of $\mathbb{Z}_p^*$,
+then $\omega = g^{(p-1)/n}$ has order exactly $n$, making it a primitive $n$-th root of unity.
 
 Common choices that support $n$ up to large powers of $2$:
 
-| $p$ | primitive root $r$ | largest supported $n$ |
+| $p$ | primitive root $g$ | largest supported $n$ |
 |-----|-------------------|----------------------|
 | $998244353 = 119 \cdot 2^{23} + 1$ | $3$ | $2^{23}$ |
 | $985661441 = 235 \cdot 2^{22} + 1$ | $3$ | $2^{22}$ |
@@ -168,6 +168,7 @@ ntt(a[0..n-1]):
 
     ntt(A0), ntt(A1)
 
+    wlen = g^((p-1)/n) mod p
     w = 1
     for j = 0..n/2-1:
         u = A0[j]
@@ -201,7 +202,7 @@ After this reordering, single-element subarrays are trivially done (base case $n
 Now consider how to assemble the final answer from the two half-results.
 Suppose positions $0\ldots3$ already hold $\text{DFT}$ of the even coefficients $[a_0, a_2, a_4, a_6]$,
 and positions $4\ldots7$ hold $\text{DFT}$ of the odd coefficients $[a_1, a_3, a_5, a_7]$.
-The butterfly formula for $i = 0, 1, 2, 3$ gives:
+The formula for $i = 0, 1, 2, 3$ gives:
 
 $$
 a[i] \leftarrow a[i] + \omega^i \cdot a[i+4], \qquad a[i+4] \leftarrow a[i] - \omega^i \cdot a[i+4].
@@ -218,7 +219,7 @@ ntt(a[0..n-1], invert):
         if i < j: swap(a[i], a[j]) // to not swap the same elements 2 times
 
     for len = 2, 4, ..., n:
-        wlen = ω^(n/len)
+        wlen = g^((p-1)/len) mod p
         for i = 0, len, 2*len, ..., n-len:
             w = 1
             for j = 0..len/2-1:
@@ -235,12 +236,12 @@ introduces cache misses: for small $\text{len}$ the stride $n/\text{len}$ is lar
 so accesses jump far apart in memory.
 
 Instead, build $\text{rt}$ so that level $\text{len}$ reads a contiguous block.
-The needed powers at level $\text{len}$ are \$\omega^{j \cdot n/\text{len}}$ for $j = 0, \ldots, \text{len}/2 - 1$.
+The needed powers at level $\text{len}$ are $\omega^{j \cdot n/\text{len}}$ for $j = 0, \ldots, \text{len}/2 - 1$.
 Store them at positions $\text{len}/2, \ldots, \text{len} - 1$:
 
 ```
 rt[n/2] = 1
-for i in 1..n/2-1:       rt[n/2 + i] = rt[n/2 + i - 1] * ω
+for i in 1..n/2-1:       rt[n/2 + i] = rt[n/2 + i - 1] * g
 for i in n/2-1 downto 1: rt[i] = rt[2*i]
 ```
 
